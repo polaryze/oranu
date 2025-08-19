@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Beige / Maroon / Black / Brown theme */
+  --background: #f5f5dc; /* beige */
+  --foreground: #111111; /* black */
+  --card: #faf3e0; /* light beige */
+  --card-foreground: #111111;
+  --popover: #f5f5dc;
+  --popover-foreground: #111111;
+  --primary: #800000; /* maroon */
+  --primary-foreground: #ffffff;
+  --secondary: #8b5e3c; /* brown */
+  --secondary-foreground: #ffffff;
+  --muted: #efe6cc; /* soft beige */
+  --muted-foreground: #5a4a3b; /* brownish gray */
+  --accent: #B87333; /* copper to match landing gradient */
+  --accent-foreground: #111111;
+  --destructive: #a23b3b;
+  --destructive-foreground: #ffffff;
+  --border: #e6d8c3; /* light brown */
+  --input: #fff8e7; /* near beige */
+  --ring: rgba(128, 0, 0, 0.35); /* maroon ring */
+  --chart-1: #800000; /* maroon */
+  --chart-2: #8b5e3c; /* brown */
+  --chart-3: #111111; /* black */
+  --chart-4: #B87333; /* copper accent */
+  --chart-5: #5c4033; /* dark brown */
+  --radius: 0.375rem;
+  --sidebar: #faf3e0;
+  --sidebar-foreground: #111111;
+  --sidebar-primary: #800000;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #B87333;
+  --sidebar-accent-foreground: #111111;
+  --sidebar-border: #e6d8c3;
+  --sidebar-ring: rgba(128, 0, 0, 0.35);
+}
+
+.dark {
+  /* Dark mode variant of beige/maroon/brown */
+  --background: #0a0a0a; /* near black */
+  --foreground: #f5f5dc; /* beige */
+  --card: #14110f; /* deep brown/black */
+  --card-foreground: #f5f5dc;
+  --popover: #14110f;
+  --popover-foreground: #f5f5dc;
+  --primary: #b22222; /* brighter maroon */
+  --primary-foreground: #f5f5dc;
+  --secondary: #8b5e3c;
+  --secondary-foreground: #f5f5dc;
+  --muted: #1a1714;
+  --muted-foreground: #cbbda6;
+  --accent: #B87333;
+  --accent-foreground: #0a0a0a;
+  --destructive: #b74c4c;
+  --destructive-foreground: #0a0a0a;
+  --border: #2a201a;
+  --input: #14110f;
+  --ring: rgba(178, 34, 34, 0.35);
+  --chart-1: #b22222;
+  --chart-2: #B87333;
+  --chart-3: #f5f5dc;
+  --chart-4: #8b5e3c;
+  --chart-5: #5c4033;
+  --sidebar: #14110f;
+  --sidebar-foreground: #f5f5dc;
+  --sidebar-primary: #b22222;
+  --sidebar-primary-foreground: #f5f5dc;
+  --sidebar-accent: #B87333;
+  --sidebar-accent-foreground: #0a0a0a;
+  --sidebar-border: #2a201a;
+  --sidebar-ring: rgba(178, 34, 34, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  ::selection {
+    background-color: orange;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+}
