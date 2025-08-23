@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { DynamicGradientBackground } from "@/components/landing/dynamic-gradient"
-import { uploadFile, FileUploadError } from "@/lib/file-upload"
+import { uploadFile } from "@/lib/file-upload"
 
 export default function LandingPage() {
   const router = useRouter()
@@ -30,16 +30,8 @@ export default function LandingPage() {
       router.push('/files')
       
     } catch (err) {
-      if (err instanceof FileUploadError) {
-        if (err.code === 'SIGN_IN_REQUIRED') {
-          // Redirect to sign in page
-          router.push('/sign-in')
-        } else {
-          setError(err.message)
-        }
-      } else {
-        setError('Upload failed. Please try again.')
-      }
+      console.error('Upload error:', err)
+      setError('Upload failed. Please try again.')
     } finally {
       setIsUploading(false)
     }

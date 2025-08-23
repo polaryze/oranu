@@ -1,4 +1,4 @@
-import { createClient } from './supabase'
+
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB in bytes
 
@@ -27,19 +27,21 @@ export const uploadFile = async (file: File): Promise<UploadedFile> => {
     )
   }
 
-  const supabase = createClient()
-  
-  // Get current user
-  const { data: { user }, error: userError } = await supabase.auth.getUser()
-  
-  // If user is not authenticated, we'll handle this differently
-  if (userError || !user) {
-    // For landing page, we can either:
-    // 1. Store files temporarily without user association
-    // 2. Prompt user to sign in
-    // For now, let's prompt to sign in
-    throw new FileUploadError('Please sign in to upload files', 'SIGN_IN_REQUIRED')
+  // For demo purposes, create a mock uploaded file
+  const mockFile: UploadedFile = {
+    id: `demo-${Date.now()}`,
+    name: file.name,
+    size: file.size,
+    type: file.type,
+    url: URL.createObjectURL(file), // Create a local URL for demo
+    uploaded_at: new Date().toISOString()
   }
+
+  // Simulate upload delay
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  return mockFile
+}
 
   // Generate unique filename
   const timestamp = Date.now()
@@ -96,70 +98,39 @@ export const uploadFile = async (file: File): Promise<UploadedFile> => {
 }
 
 export const getUserFiles = async (): Promise<UploadedFile[]> => {
-  const supabase = createClient()
-  
-  const { data: { user }, error: userError } = await supabase.auth.getUser()
-  if (userError || !user) {
-    throw new FileUploadError('User not authenticated', 'UNAUTHORIZED')
-  }
+  // For demo purposes, return mock files
+  const mockFiles: UploadedFile[] = [
+    {
+      id: 'demo-1',
+      name: 'Study Schedule.pdf',
+      size: 1024 * 1024, // 1MB
+      type: 'application/pdf',
+      url: '#',
+      uploaded_at: new Date(Date.now() - 86400000).toISOString() // 1 day ago
+    },
+    {
+      id: 'demo-2',
+      name: 'Math Notes.docx',
+      size: 512 * 1024, // 512KB
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      url: '#',
+      uploaded_at: new Date(Date.now() - 172800000).toISOString() // 2 days ago
+    }
+  ]
 
-  const { data, error } = await supabase
-    .from('files')
-    .select('*')
-    .eq('user_id', user.id)
-    .order('created_at', { ascending: false })
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 500))
 
-  if (error) {
-    throw new FileUploadError(`Failed to fetch files: ${error.message}`, 'FETCH_FAILED')
-  }
-
-  return data.map(file => ({
-    id: file.id,
-    name: file.name,
-    size: file.size,
-    type: file.type,
-    url: file.public_url,
-    uploaded_at: file.created_at
-  }))
+  return mockFiles
 }
 
 export const deleteFile = async (fileId: string): Promise<void> => {
-  const supabase = createClient()
+  // For demo purposes, just simulate deletion
+  console.log(`Demo: Deleting file with ID: ${fileId}`)
   
-  const { data: { user }, error: userError } = await supabase.auth.getUser()
-  if (userError || !user) {
-    throw new FileUploadError('User not authenticated', 'UNAUTHORIZED')
-  }
-
-  // Get file info first
-  const { data: file, error: fetchError } = await supabase
-    .from('files')
-    .select('*')
-    .eq('id', fileId)
-    .eq('user_id', user.id)
-    .single()
-
-  if (fetchError || !file) {
-    throw new FileUploadError('File not found or access denied', 'NOT_FOUND')
-  }
-
-  // Delete from storage
-  const { error: storageError } = await supabase.storage
-    .from('uploads')
-    .remove([file.storage_path])
-
-  if (storageError) {
-    console.error('Storage delete error:', storageError)
-  }
-
-  // Delete from database
-  const { error: dbError } = await supabase
-    .from('files')
-    .delete()
-    .eq('id', fileId)
-    .eq('user_id', user.id)
-
-  if (dbError) {
-    throw new FileUploadError(`Failed to delete file: ${dbError.message}`, 'DELETE_FAILED')
-  }
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 500))
+  
+  // In a real app, this would delete from Supabase
+  // For now, we just return successfully
 }

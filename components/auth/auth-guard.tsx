@@ -2,39 +2,31 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase"
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-  const supabase = createClient()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    let isMounted = true
+    // Simulate loading for demo purposes
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 500)
 
-    const check = async () => {
-      const { data } = await supabase.auth.getUser()
-      if (!isMounted) return
-      if (!data.user) {
-        router.replace("/sign-in")
-      } else {
-        setIsLoading(false)
-      }
-    }
+    return () => clearTimeout(timer)
+  }, [])
 
-    check()
-
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!session?.user) router.replace("/sign-in")
-    })
-
-    return () => {
-      isMounted = false
-      subscription.subscription.unsubscribe()
-    }
-  }, [router, supabase])
-
-  if (isLoading) return null
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+  
   return <>{children}</>
 }
 

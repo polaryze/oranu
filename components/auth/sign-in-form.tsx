@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Link from "next/link"
-import { createClient } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
 
 export function SignInForm() {
@@ -18,31 +17,30 @@ export function SignInForm() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState("")
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setMessage("")
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
-      setMessage(error.message)
+    // Simulate loading for demo purposes
+    setTimeout(() => {
       setLoading(false)
-      return
-    }
-    if (data.session) {
+      // Just redirect to dashboard without authentication
       router.push("/dashboard")
-    }
-    setLoading(false)
+    }, 1000)
   }
 
   const handleOAuth = async (provider: "google" | "apple") => {
     setLoading(true)
     setMessage("")
-    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: `${window.location.origin}/dashboard` } })
-    if (error) setMessage(error.message)
-    setLoading(false)
+    
+    // Simulate loading for demo purposes
+    setTimeout(() => {
+      setLoading(false)
+      // Just redirect to dashboard without authentication
+      router.push("/dashboard")
+    }, 1000)
   }
 
   return (
