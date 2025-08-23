@@ -1,16 +1,16 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { DynamicGradientBackground } from "@/components/landing/dynamic-gradient"
-import { uploadFile, type UploadedFile, FileUploadError } from "@/lib/file-upload"
+import { uploadFile, FileUploadError } from "@/lib/file-upload"
 
 export default function LandingPage() {
+  const router = useRouter()
   const [isUploading, setIsUploading] = useState(false)
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
   const [error, setError] = useState<string | null>(null)
-  const [showSignInPrompt, setShowSignInPrompt] = useState(false)
 
   const handleFileUpload = async (files: FileList | null) => {
     if (!files || files.length === 0) return
@@ -20,18 +20,20 @@ export default function LandingPage() {
 
     try {
       const uploadPromises = Array.from(files).map(file => uploadFile(file))
-      const results = await Promise.all(uploadPromises)
-      
-      setUploadedFiles(prev => [...results, ...prev])
+      await Promise.all(uploadPromises)
       
       // Clear the input
       const fileInput = document.getElementById('file-upload') as HTMLInputElement
       if (fileInput) fileInput.value = ''
       
+      // Redirect to files page after successful upload
+      router.push('/files')
+      
     } catch (err) {
       if (err instanceof FileUploadError) {
         if (err.code === 'SIGN_IN_REQUIRED') {
-          setShowSignInPrompt(true)
+          // Redirect to sign in page
+          router.push('/sign-in')
         } else {
           setError(err.message)
         }
@@ -89,7 +91,6 @@ export default function LandingPage() {
                     </svg>
                   </div>
                   <p className="text-white/80 text-sm mb-2">Drop your schedule & study materials here</p>
-                  <p className="text-white/50 text-xs mb-2">Sign in to upload and save files</p>
                   <label htmlFor="file-upload" className="text-white/60 text-xs cursor-pointer hover:text-white/80 transition-colors">
                     or click to browse files
                   </label>
@@ -112,45 +113,9 @@ export default function LandingPage() {
               </div>
             )}
             
-            {/* Sign in prompt */}
-            {showSignInPrompt && (
-              <div className="mt-3 p-3 bg-blue-500/20 border border-blue-500/30 rounded text-center">
-                <p className="text-blue-200 text-sm mb-2">Sign in to upload and manage your files</p>
-                <div className="flex gap-2 justify-center">
-                  <Link href="/sign-in">
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link href="/sign-up">
-                    <Button size="sm" variant="outline" className="border-blue-400 text-blue-200 hover:bg-blue-500/20">
-                      Sign Up
-                    </Button>
-                  </Link>
-                </div>
-                <button 
-                  onClick={() => setShowSignInPrompt(false)}
-                  className="text-blue-300 text-xs mt-2 hover:text-blue-100"
-                >
-                  Maybe later
-                </button>
-              </div>
-            )}
+
             
-            {/* Uploaded files list */}
-            {uploadedFiles.length > 0 && (
-              <div className="mt-4 space-y-2">
-                <p className="text-white/60 text-xs">Recently uploaded:</p>
-                <div className="space-y-1 max-h-32 overflow-y-auto">
-                  {uploadedFiles.slice(0, 3).map((file) => (
-                    <div key={file.id} className="flex items-center justify-between text-xs bg-white/5 rounded px-2 py-1">
-                      <span className="text-white/80 truncate flex-1">{file.name}</span>
-                      <span className="text-white/60 ml-2">{(file.size / 1024 / 1024).toFixed(2)}MB</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+
           </div>
         </div>
       </div>
