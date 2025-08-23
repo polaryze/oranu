@@ -1,4 +1,11 @@
-import { AuthGuard } from "@/components/auth/auth-guard"
+"use client"
+
+import dynamic from "next/dynamic"
+
+const AuthGuard = dynamic(() => import("@/components/auth/auth-guard").then(mod => ({ default: mod.AuthGuard })), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+})
 
 export default function FriendsPage() {
   return (

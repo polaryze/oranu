@@ -1,6 +1,13 @@
+"use client"
+
 import type React from "react"
+import dynamic from "next/dynamic"
 import { Sidebar } from "@/components/layout/sidebar"
-import { AuthGuard } from "@/components/auth/auth-guard"
+
+const AuthGuard = dynamic(() => import("@/components/auth/auth-guard").then(mod => ({ default: mod.AuthGuard })), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+})
 
 export default function DashboardLayout({
   children,

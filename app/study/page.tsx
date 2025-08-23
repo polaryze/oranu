@@ -1,13 +1,18 @@
 "use client"
 
 import { useState } from "react"
+import dynamic from "next/dynamic"
 import { TechniqueSelector } from "@/components/study/technique-selector"
 import { PomodoroTimer } from "@/components/study/pomodoro-timer"
 import { FeynmanTechnique } from "@/components/study/feynman-technique"
 import { ActiveRecall } from "@/components/study/active-recall"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
-import { AuthGuard } from "@/components/auth/auth-guard"
+
+const AuthGuard = dynamic(() => import("@/components/auth/auth-guard").then(mod => ({ default: mod.AuthGuard })), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+})
 
 export default function StudyPage() {
   const [selectedTechnique, setSelectedTechnique] = useState<string | null>(null)

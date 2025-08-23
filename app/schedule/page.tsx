@@ -1,10 +1,15 @@
 "use client"
 
 import { useState } from "react"
+import dynamic from "next/dynamic"
 import { CalendarView } from "@/components/schedule/calendar-view"
 import { UpcomingSessions } from "@/components/schedule/upcoming-sessions"
 import { SessionForm } from "@/components/schedule/session-form"
-import { AuthGuard } from "@/components/auth/auth-guard"
+
+const AuthGuard = dynamic(() => import("@/components/auth/auth-guard").then(mod => ({ default: mod.AuthGuard })), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+})
 
 export default function SchedulePage() {
   const [showSessionForm, setShowSessionForm] = useState(false)

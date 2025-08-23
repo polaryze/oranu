@@ -1,9 +1,16 @@
+"use client"
+
 import { StatsOverview } from "@/components/progress/stats-overview"
 import { StudyTimeChart } from "@/components/progress/study-time-chart"
 import { SubjectBreakdown } from "@/components/progress/subject-breakdown"
 import { StreakCalendar } from "@/components/progress/streak-calendar"
 import { AchievementBadges } from "@/components/progress/achievement-badges"
-import { AuthGuard } from "@/components/auth/auth-guard"
+import dynamic from "next/dynamic"
+
+const AuthGuard = dynamic(() => import("@/components/auth/auth-guard").then(mod => ({ default: mod.AuthGuard })), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+})
 
 export default function ProgressPage() {
   return (
