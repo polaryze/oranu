@@ -1,5 +1,7 @@
 
 
+import { createClient } from './supabase'
+
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB in bytes
 
 export interface UploadedFile {
@@ -27,23 +29,50 @@ export const uploadFile = async (file: File): Promise<UploadedFile> => {
     )
   }
 
-  // Create the uploaded file object
-  const uploadedFile: UploadedFile = {
-    id: `demo-${Date.now()}`,
-    name: file.name,
-    size: file.size,
-    type: file.type,
-    url: URL.createObjectURL(file), // Create a local URL for demo
-    uploaded_at: new Date().toISOString()
+  const supabase = createClient()
+  
+  try {
+    // Generate unique filename
+    const timestamp = Date.now()
+    const fileExtension = file.name.split('.').pop()
+    const uniqueFileName = `public/${timestamp}-${Math.random().toString(36).substring(2)}.${fileExtension}`
+
+    // Upload file to Supabase Storage (public bucket, no auth required)
+    const { data, error } = await supabase.storage
+      .from('uploads')
+      .upload(uniqueFileName, file, {
+        cacheControl: '3600',
+        upsert: false
+      })
+
+    if (error) {
+      console.error('Storage upload error:', error)
+      throw new FileUploadError(`Upload failed: ${error.message}`, 'UPLOAD_FAILED')
+    }
+
+    // Get public URL
+    const { data: urlData } = supabase.storage
+      .from('uploads')
+      .getPublicUrl(uniqueFileName)
+
+    // Create the uploaded file object
+    const uploadedFile: UploadedFile = {
+      id: `file-${Date.now()}`,
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      url: urlData.publicUrl,
+      uploaded_at: new Date().toISOString()
+    }
+
+    // Add to our in-memory storage for immediate display
+    uploadedFiles.unshift(uploadedFile)
+
+    return uploadedFile
+  } catch (error) {
+    console.error('Upload error:', error)
+    throw new FileUploadError('Upload failed. Please try again.', 'UPLOAD_FAILED')
   }
-
-  // Add to our in-memory storage
-  uploadedFiles.unshift(uploadedFile) // Add to beginning of array
-
-  // Simulate upload delay
-  await new Promise(resolve => setTimeout(resolve, 1000))
-
-  return uploadedFile
 }
 
 // Store uploaded files in memory for demo purposes
@@ -67,18 +96,78 @@ let uploadedFiles: UploadedFile[] = [
 ]
 
 export const getUserFiles = async (): Promise<UploadedFile[]> => {
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 500))
+  const supabase = createClient()
   
-  return uploadedFiles
+  try {
+    // List all files from the uploads bucket
+    const { data, error } = await supabase.storage
+      .from('uploads')
+      .list('public', {
+        limit: 100,
+        offset: 0,
+        sortBy: { column: 'created_at', order: 'desc' }
+      })
+
+    if (error) {
+      console.error('Error fetching files:', error)
+      // Fall back to in-memory files if Supabase fails
+      return uploadedFiles
+    }
+
+    // Convert storage files to our UploadedFile format
+    const supabaseFiles: UploadedFile[] = data
+      .filter(item => item.name !== '.emptyFolderPlaceholder')
+      .map(item => ({
+        id: item.id || `file-${Date.now()}-${Math.random()}`,
+        name: item.name,
+        size: item.metadata?.size || 0,
+        type: item.metadata?.mimetype || 'application/octet-stream',
+        url: supabase.storage.from('uploads').getPublicUrl(`public/${item.name}`).data.publicUrl,
+        uploaded_at: item.updated_at || new Date().toISOString()
+      }))
+
+    // Combine Supabase files with any in-memory files
+    const allFiles = [...supabaseFiles, ...uploadedFiles.filter(file => 
+      !supabaseFiles.some(sf => sf.name === file.name)
+    )]
+
+    return allFiles
+  } catch (error) {
+    console.error('Error fetching files:', error)
+    // Fall back to in-memory files if there's an error
+    return uploadedFiles
+  }
 }
 
 export const deleteFile = async (fileId: string): Promise<void> => {
-  // Remove file from our in-memory storage
-  uploadedFiles = uploadedFiles.filter(file => file.id !== fileId)
+  const supabase = createClient()
   
-  console.log(`Demo: Deleted file with ID: ${fileId}`)
-  
-  // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 500))
+  try {
+    // Find the file to get its path
+    const fileToDelete = uploadedFiles.find(file => file.id === fileId)
+    
+    if (fileToDelete) {
+      // Extract filename from URL or use the name
+      const fileName = fileToDelete.name
+      const filePath = `public/${fileName}`
+      
+      // Delete from Supabase storage
+      const { error } = await supabase.storage
+        .from('uploads')
+        .remove([filePath])
+      
+      if (error) {
+        console.error('Error deleting from storage:', error)
+      }
+    }
+    
+    // Remove from in-memory storage
+    uploadedFiles = uploadedFiles.filter(file => file.id !== fileId)
+    
+    console.log(`Deleted file with ID: ${fileId}`)
+  } catch (error) {
+    console.error('Error deleting file:', error)
+    // Still remove from in-memory storage even if Supabase fails
+    uploadedFiles = uploadedFiles.filter(file => file.id !== fileId)
+  }
 }
