@@ -62,9 +62,9 @@ export function StatsOverview() {
               <p
                 className={`text-xs ${
                   stat.trend === "up"
-                    ? "text-green-600"
+                    ? "text-secondary"
                     : stat.trend === "down"
-                      ? "text-red-600"
+                      ? "text-destructive"
                       : "text-muted-foreground"
                 }`}
               >

@@ -5,11 +5,11 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts"
 
 const subjectData = [
-  { subject: "Mathematics", hours: 12.5, color: "#dc2626" },
-  { subject: "Physics", hours: 8.3, color: "#2563eb" },
-  { subject: "Chemistry", hours: 6.7, color: "#16a34a" },
-  { subject: "Biology", hours: 4.2, color: "#ca8a04" },
-  { subject: "History", hours: 3.1, color: "#9333ea" },
+  { subject: "Mathematics", hours: 12.5, color: "hsl(var(--chart-1))" },
+  { subject: "Physics", hours: 8.3, color: "hsl(var(--chart-2))" },
+  { subject: "Chemistry", hours: 6.7, color: "hsl(var(--chart-3))" },
+  { subject: "Biology", hours: 4.2, color: "hsl(var(--chart-4))" },
+  { subject: "History", hours: 3.1, color: "hsl(var(--chart-5))" },
 ]
 
 export function SubjectBreakdown() {

@@ -113,7 +113,7 @@ export default function FilesPage() {
 
         {/* Make Schedule Button */}
         {files.length > 0 && (
-          <div className="mb-8 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg">
+          <div className="mb-8 p-6 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-semibold text-foreground mb-2">
@@ -124,7 +124,7 @@ export default function FilesPage() {
                 </p>
               </div>
               <Link href="/schedule">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                <Button size="lg" className="bg-primary hover:bg-primary/90">
                   <Calendar className="w-5 h-5 mr-2" />
                   Make My Schedule
                 </Button>

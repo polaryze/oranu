@@ -46,15 +46,15 @@ export function SignInForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full max-w-md mx-auto bg-black/40 backdrop-blur-xl border-white/10 shadow-2xl">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold text-primary">Welcome Back</CardTitle>
-        <CardDescription>Sign in to continue your study journey</CardDescription>
+        <CardTitle className="text-3xl font-bold text-primary mb-2">Welcome Back</CardTitle>
+        <CardDescription className="text-white/70 text-lg">Sign in to continue your study journey</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSignIn} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-white font-medium">Email</Label>
             <Input
               id="email"
               type="email"
@@ -62,10 +62,11 @@ export function SignInForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-primary focus:ring-primary/50"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-white font-medium">Password</Label>
             <Input
               id="password"
               type="password"
@@ -73,6 +74,7 @@ export function SignInForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-primary focus:ring-primary/50"
             />
           </div>
           {message && (
@@ -80,21 +82,21 @@ export function SignInForm() {
               <AlertDescription>{message}</AlertDescription>
             </Alert>
           )}
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-black font-semibold py-3 text-lg shadow-lg" disabled={loading}>
             {loading ? "Signing In..." : "Sign In"}
           </Button>
         </form>
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <Button type="button" variant="outline" onClick={() => handleOAuth("google")} disabled={loading}>
+        <div className="mt-6 grid grid-cols-2 gap-3">
+          <Button type="button" variant="outline" onClick={() => handleOAuth("google")} disabled={loading} className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
             Continue with Google
           </Button>
-          <Button type="button" variant="outline" onClick={() => handleOAuth("apple")} disabled={loading}>
+          <Button type="button" variant="outline" onClick={() => handleOAuth("apple")} disabled={loading} className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
             Continue with Apple
           </Button>
         </div>
-        <div className="mt-4 text-center text-sm">
+        <div className="mt-6 text-center text-sm">
           Don't have an account?{" "}
-          <Link href="/sign-up" className="text-primary hover:underline">
+          <Link href="/sign-up" className="text-primary hover:text-primary/80 font-medium">
             Sign up
           </Link>
         </div>

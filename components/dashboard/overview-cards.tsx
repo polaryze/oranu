@@ -32,7 +32,7 @@ export function OverviewCards() {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Weekly Progress</CardTitle>
-          <Target className="h-4 w-4 text-green-600" />
+          <Target className="h-4 w-4 text-secondary" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">85%</div>
@@ -44,7 +44,7 @@ export function OverviewCards() {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Next Session</CardTitle>
-          <Calendar className="h-4 w-4 text-blue-600" />
+          <Calendar className="h-4 w-4 text-accent" />
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">2:00 PM</div>
