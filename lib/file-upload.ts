@@ -31,8 +31,14 @@ export const uploadFile = async (file: File): Promise<UploadedFile> => {
   
   // Get current user
   const { data: { user }, error: userError } = await supabase.auth.getUser()
+  
+  // If user is not authenticated, we'll handle this differently
   if (userError || !user) {
-    throw new FileUploadError('User not authenticated', 'UNAUTHORIZED')
+    // For landing page, we can either:
+    // 1. Store files temporarily without user association
+    // 2. Prompt user to sign in
+    // For now, let's prompt to sign in
+    throw new FileUploadError('Please sign in to upload files', 'SIGN_IN_REQUIRED')
   }
 
   // Generate unique filename

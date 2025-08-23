@@ -10,6 +10,7 @@ export default function LandingPage() {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [showSignInPrompt, setShowSignInPrompt] = useState(false)
 
   const handleFileUpload = async (files: FileList | null) => {
     if (!files || files.length === 0) return
@@ -29,7 +30,11 @@ export default function LandingPage() {
       
     } catch (err) {
       if (err instanceof FileUploadError) {
-        setError(err.message)
+        if (err.code === 'SIGN_IN_REQUIRED') {
+          setShowSignInPrompt(true)
+        } else {
+          setError(err.message)
+        }
       } else {
         setError('Upload failed. Please try again.')
       }
@@ -84,6 +89,7 @@ export default function LandingPage() {
                     </svg>
                   </div>
                   <p className="text-white/80 text-sm mb-2">Drop your schedule & study materials here</p>
+                  <p className="text-white/50 text-xs mb-2">Sign in to upload and save files</p>
                   <label htmlFor="file-upload" className="text-white/60 text-xs cursor-pointer hover:text-white/80 transition-colors">
                     or click to browse files
                   </label>
@@ -103,6 +109,31 @@ export default function LandingPage() {
             {error && (
               <div className="mt-3 p-2 bg-red-500/20 border border-red-500/30 rounded text-red-200 text-xs">
                 {error}
+              </div>
+            )}
+            
+            {/* Sign in prompt */}
+            {showSignInPrompt && (
+              <div className="mt-3 p-3 bg-blue-500/20 border border-blue-500/30 rounded text-center">
+                <p className="text-blue-200 text-sm mb-2">Sign in to upload and manage your files</p>
+                <div className="flex gap-2 justify-center">
+                  <Link href="/sign-in">
+                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link href="/sign-up">
+                    <Button size="sm" variant="outline" className="border-blue-400 text-blue-200 hover:bg-blue-500/20">
+                      Sign Up
+                    </Button>
+                  </Link>
+                </div>
+                <button 
+                  onClick={() => setShowSignInPrompt(false)}
+                  className="text-blue-300 text-xs mt-2 hover:text-blue-100"
+                >
+                  Maybe later
+                </button>
               </div>
             )}
             
