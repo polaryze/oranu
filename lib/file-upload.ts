@@ -27,8 +27,8 @@ export const uploadFile = async (file: File): Promise<UploadedFile> => {
     )
   }
 
-  // For demo purposes, create a mock uploaded file
-  const mockFile: UploadedFile = {
+  // Create the uploaded file object
+  const uploadedFile: UploadedFile = {
     id: `demo-${Date.now()}`,
     name: file.name,
     size: file.size,
@@ -37,46 +37,48 @@ export const uploadFile = async (file: File): Promise<UploadedFile> => {
     uploaded_at: new Date().toISOString()
   }
 
+  // Add to our in-memory storage
+  uploadedFiles.unshift(uploadedFile) // Add to beginning of array
+
   // Simulate upload delay
   await new Promise(resolve => setTimeout(resolve, 1000))
 
-  return mockFile
+  return uploadedFile
 }
 
-export const getUserFiles = async (): Promise<UploadedFile[]> => {
-  // For demo purposes, return mock files
-  const mockFiles: UploadedFile[] = [
-    {
-      id: 'demo-1',
-      name: 'Study Schedule.pdf',
-      size: 1024 * 1024, // 1MB
-      type: 'application/pdf',
-      url: '#',
-      uploaded_at: new Date(Date.now() - 86400000).toISOString() // 1 day ago
-    },
-    {
-      id: 'demo-2',
-      name: 'Math Notes.docx',
-      size: 512 * 1024, // 512KB
-      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      url: '#',
-      uploaded_at: new Date(Date.now() - 172800000).toISOString() // 2 days ago
-    }
-  ]
+// Store uploaded files in memory for demo purposes
+let uploadedFiles: UploadedFile[] = [
+  {
+    id: 'demo-1',
+    name: 'Study Schedule.pdf',
+    size: 1024 * 1024, // 1MB
+    type: 'application/pdf',
+    url: '#',
+    uploaded_at: new Date(Date.now() - 86400000).toISOString() // 1 day ago
+  },
+  {
+    id: 'demo-2',
+    name: 'Math Notes.docx',
+    size: 512 * 1024, // 512KB
+    type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    url: '#',
+    uploaded_at: new Date(Date.now() - 172800000).toISOString() // 2 days ago
+  }
+]
 
+export const getUserFiles = async (): Promise<UploadedFile[]> => {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 500))
-
-  return mockFiles
+  
+  return uploadedFiles
 }
 
 export const deleteFile = async (fileId: string): Promise<void> => {
-  // For demo purposes, just simulate deletion
-  console.log(`Demo: Deleting file with ID: ${fileId}`)
+  // Remove file from our in-memory storage
+  uploadedFiles = uploadedFiles.filter(file => file.id !== fileId)
+  
+  console.log(`Demo: Deleted file with ID: ${fileId}`)
   
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 500))
-  
-  // In a real app, this would delete from Supabase
-  // For now, we just return successfully
 }
