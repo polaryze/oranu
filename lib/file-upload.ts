@@ -43,60 +43,6 @@ export const uploadFile = async (file: File): Promise<UploadedFile> => {
   return mockFile
 }
 
-  // Generate unique filename
-  const timestamp = Date.now()
-  const fileExtension = file.name.split('.').pop()
-  const uniqueFileName = `${user.id}/${timestamp}-${Math.random().toString(36).substring(2)}.${fileExtension}`
-
-  // Upload file to Supabase Storage
-  const { data, error } = await supabase.storage
-    .from('uploads')
-    .upload(uniqueFileName, file, {
-      cacheControl: '3600',
-      upsert: false
-    })
-
-  if (error) {
-    console.error('Storage upload error:', error)
-    throw new FileUploadError(`Upload failed: ${error.message}`, 'UPLOAD_FAILED')
-  }
-
-  // Get public URL
-  const { data: urlData } = supabase.storage
-    .from('uploads')
-    .getPublicUrl(uniqueFileName)
-
-  // Store file metadata in database
-  const { data: dbData, error: dbError } = await supabase
-    .from('files')
-    .insert({
-      user_id: user.id,
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      storage_path: uniqueFileName,
-      public_url: urlData.publicUrl
-    })
-    .select()
-    .single()
-
-  if (dbError) {
-    console.error('Database insert error:', dbError)
-    // Try to clean up the uploaded file if database insert fails
-    await supabase.storage.from('uploads').remove([uniqueFileName])
-    throw new FileUploadError(`Failed to save file metadata: ${dbError.message}`, 'DATABASE_ERROR')
-  }
-
-  return {
-    id: dbData.id,
-    name: dbData.name,
-    size: dbData.size,
-    type: dbData.type,
-    url: dbData.public_url,
-    uploaded_at: dbData.created_at
-  }
-}
-
 export const getUserFiles = async (): Promise<UploadedFile[]> => {
   // For demo purposes, return mock files
   const mockFiles: UploadedFile[] = [
