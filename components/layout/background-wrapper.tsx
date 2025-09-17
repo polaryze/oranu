@@ -8,7 +8,7 @@ interface BackgroundWrapperProps {
 
 export function BackgroundWrapper({ children }: BackgroundWrapperProps) {
   return (
-    <div className="h-screen relative overflow-hidden">
+    <div className="h-screen md:h-screen min-h-screen relative overflow-auto md:overflow-hidden">
       {/* Wallpaper Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -31,7 +31,7 @@ export function BackgroundWrapper({ children }: BackgroundWrapperProps) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full">
+      <div className="relative z-10 h-full md:h-full min-h-full">
         {children}
       </div>
     </div>

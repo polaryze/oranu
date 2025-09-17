@@ -19,13 +19,17 @@ export default function DashboardLayout({
   return (
     <AuthGuard>
       <BackgroundWrapper>
-        <div className="flex h-full">
+        <div className="flex h-full md:h-full min-h-full">
           {/* Desktop Sidebar */}
           <Sidebar />
           
           {/* Main Content */}
-          <main className="flex-1 ml-0 md:ml-72 overflow-auto md:overflow-hidden">
-            <div className="h-full p-4 lg:p-6">{children}</div>
+          <main className="flex-1 ml-0 md:ml-72">
+            <div className="h-full md:h-full min-h-full p-4 lg:p-6 relative">
+              {/* Mobile fade effect at top */}
+              <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none md:hidden"></div>
+              {children}
+            </div>
           </main>
           
           {/* Mobile Sidebar */}
