@@ -8,7 +8,7 @@ interface BackgroundWrapperProps {
 
 export function BackgroundWrapper({ children }: BackgroundWrapperProps) {
   return (
-    <div className="h-screen md:h-screen min-h-screen relative overflow-auto md:overflow-hidden">
+    <div className="h-screen md:h-screen min-h-screen relative overflow-auto md:overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
       {/* Wallpaper Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
