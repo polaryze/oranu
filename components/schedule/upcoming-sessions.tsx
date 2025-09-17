@@ -35,45 +35,50 @@ const upcomingSessions = [
 
 export function UpcomingSessions() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Clock className="h-5 w-5" />
-          Upcoming Sessions
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        {upcomingSessions.map((session) => (
-          <div key={session.id} className="flex items-center justify-between p-4 border rounded-lg">
-            <div className="flex-1 space-y-2">
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-primary" />
-                <span className="font-medium">{session.subject}</span>
-                <Badge variant="secondary">{session.technique}</Badge>
+    <div className="h-full bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden">
+      <div className="p-4 border-b border-border/50">
+        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+          <Clock className="h-4 w-4" />
+          Upcoming
+        </h3>
+      </div>
+      <div className="flex-1 p-4 overflow-auto">
+        <div className="space-y-3">
+          {upcomingSessions.map((session) => (
+            <div key={session.id} className="group p-3 rounded-xl border border-border/30 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="h-3 w-3 text-primary" />
+                    <span className="font-medium text-sm">{session.subject}</span>
+                  </div>
+                  <Badge variant="secondary" className="text-xs">{session.technique}</Badge>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span>{session.date} at {session.time}</span>
+                  <span>•</span>
+                  <span>{session.duration}m</span>
+                </div>
+                {session.notes && (
+                  <p className="text-xs text-muted-foreground line-clamp-2">{session.notes}</p>
+                )}
+                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <Button size="sm" variant="default" className="h-6 px-2 text-xs">
+                    <Play className="h-3 w-3 mr-1" />
+                    Start
+                  </Button>
+                  <Button size="sm" variant="ghost" className="h-6 px-2">
+                    <Edit className="h-3 w-3" />
+                  </Button>
+                  <Button size="sm" variant="ghost" className="h-6 px-2">
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
+                </div>
               </div>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <span>
-                  {session.date} at {session.time}
-                </span>
-                <span>{session.duration} minutes</span>
-              </div>
-              {session.notes && <p className="text-sm text-muted-foreground">{session.notes}</p>}
             </div>
-            <div className="flex items-center gap-2">
-              <Button size="sm" variant="default">
-                <Play className="h-3 w-3 mr-1" />
-                Start
-              </Button>
-              <Button size="sm" variant="ghost">
-                <Edit className="h-3 w-3" />
-              </Button>
-              <Button size="sm" variant="ghost">
-                <Trash2 className="h-3 w-3" />
-              </Button>
-            </div>
-          </div>
-        ))}
-      </CardContent>
-    </Card>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }

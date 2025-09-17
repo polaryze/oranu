@@ -79,7 +79,7 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
 
     // Empty cells for days before the first day of the month
     for (let i = 0; i < firstDayOfWeek; i++) {
-      days.push(<div key={`empty-${i}`} className="h-24 border border-border/50" />)
+      days.push(<div key={`empty-${i}`} className="h-16 rounded-lg" />)
     }
 
     // Days of the month
@@ -92,16 +92,18 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
       days.push(
         <div
           key={day}
-          className={`h-24 border border-border/50 p-1 ${isToday ? "bg-primary/10" : "hover:bg-muted/50"}`}
+          className={`h-16 rounded-lg p-2 flex flex-col ${isToday ? "bg-primary/10 border border-primary/30" : "hover:bg-muted/30 border border-transparent hover:border-border/50"}`}
         >
-          <div className={`text-sm font-medium mb-1 ${isToday ? "text-primary" : ""}`}>{day}</div>
-          <div className="space-y-1">
-            {sessions.slice(0, 2).map((session) => (
+          <div className={`text-xs font-medium ${isToday ? "text-primary" : "text-foreground"}`}>{day}</div>
+          <div className="flex-1 flex flex-col justify-end space-y-0.5">
+            {sessions.slice(0, 1).map((session) => (
               <div key={session.id} className="text-xs p-1 rounded bg-primary/20 text-primary truncate">
                 {session.time} {session.subject}
               </div>
             ))}
-            {sessions.length > 2 && <div className="text-xs text-muted-foreground">+{sessions.length - 2} more</div>}
+            {sessions.length > 1 && (
+              <div className="text-xs text-muted-foreground text-center">+{sessions.length - 1}</div>
+            )}
           </div>
         </div>,
       )
@@ -111,57 +113,66 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
   }
 
   return (
-    <Card>
-      <CardHeader>
+    <div className="h-full bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden">
+      {/* Calendar Header */}
+      <div className="p-4 border-b border-border/50">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" onClick={() => navigateMonth("prev")}>
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" onClick={() => navigateMonth("prev")} className="hover:bg-primary/10">
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <span>
+            <h2 className="text-lg font-semibold text-foreground">
               {months[currentMonth]} {currentYear}
-            </span>
-            <Button variant="ghost" size="sm" onClick={() => navigateMonth("next")}>
+            </h2>
+            <Button variant="ghost" size="sm" onClick={() => navigateMonth("next")} className="hover:bg-primary/10">
               <ChevronRight className="h-4 w-4" />
             </Button>
-          </CardTitle>
-          <div className="flex items-center gap-2">
-            <div className="flex rounded-lg border">
-              <Button variant={view === "month" ? "default" : "ghost"} size="sm" onClick={() => setView("month")}>
-                Month
-              </Button>
-              <Button variant={view === "week" ? "default" : "ghost"} size="sm" onClick={() => setView("week")}>
-                Week
-              </Button>
-            </div>
-            <Button onClick={onCreateSession}>
-              <Plus className="mr-2 h-4 w-4" />
-              New Session
+          </div>
+          <div className="flex rounded-lg border border-border/50">
+            <Button 
+              variant={view === "month" ? "default" : "ghost"} 
+              size="sm" 
+              onClick={() => setView("month")}
+              className="text-xs"
+            >
+              Month
+            </Button>
+            <Button 
+              variant={view === "week" ? "default" : "ghost"} 
+              size="sm" 
+              onClick={() => setView("week")}
+              className="text-xs"
+            >
+              Week
             </Button>
           </div>
         </div>
-      </CardHeader>
-      <CardContent>
+      </div>
+
+      {/* Calendar Content */}
+      <div className="flex-1 p-4 overflow-auto">
         {view === "month" ? (
-          <div className="space-y-4">
+          <div className="h-full flex flex-col">
             {/* Days of week header */}
-            <div className="grid grid-cols-7 gap-0">
+            <div className="grid grid-cols-7 gap-1 mb-2">
               {daysOfWeek.map((day) => (
                 <div
                   key={day}
-                  className="h-8 flex items-center justify-center font-medium text-sm border border-border/50 bg-muted/50"
+                  className="h-8 flex items-center justify-center font-medium text-xs text-muted-foreground bg-muted/30 rounded-lg"
                 >
                   {day}
                 </div>
               ))}
             </div>
             {/* Calendar grid */}
-            <div className="grid grid-cols-7 gap-0">{renderCalendarDays()}</div>
+            <div className="flex-1 grid grid-cols-7 gap-1">{renderCalendarDays()}</div>
           </div>
         ) : (
-          <div className="text-center py-8 text-muted-foreground">Week view coming soon...</div>
+          <div className="h-full flex items-center justify-center text-muted-foreground">
+            Week view coming soon...
+          </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }
