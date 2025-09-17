@@ -16,18 +16,20 @@ export default function DashboardLayout({
 }) {
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10 relative overflow-hidden">
+      <div className="h-screen bg-gradient-to-br from-background via-background to-muted/20 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-accent/5 rounded-full blur-2xl"></div>
-          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 right-1/3 w-28 h-28 bg-cyan-500/10 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-1/3 right-10 w-36 h-36 bg-emerald-500/10 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 flex h-screen">
+        <div className="relative z-10 flex h-full">
           <Sidebar />
-          <main className="flex-1 overflow-auto ml-0 md:ml-72">
-            <div className="p-6 lg:p-8">{children}</div>
+          <main className="flex-1 ml-0 md:ml-72 overflow-hidden">
+            <div className="h-full p-4 lg:p-6">{children}</div>
           </main>
         </div>
       </div>

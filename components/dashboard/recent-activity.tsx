@@ -40,15 +40,15 @@ export function RecentActivity() {
     <>
       {/* Recent Study Sessions */}
       <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all duration-300 h-full">
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <div className="w-6 h-6 bg-primary/10 rounded-lg flex items-center justify-center">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center gap-2 text-sm">
+            <div className="w-5 h-5 bg-primary/10 rounded-md flex items-center justify-center">
               <BookOpen className="h-3 w-3 text-primary" />
             </div>
             Recent Sessions
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2 pt-0">
+        <CardContent className="space-y-1 pt-0">
           {recentSessions.map((session) => (
             <div key={session.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
               <div className="space-y-1">
@@ -73,15 +73,15 @@ export function RecentActivity() {
 
       {/* Friend Activity */}
       <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/30 transition-all duration-300 h-full">
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <div className="w-6 h-6 bg-accent/10 rounded-lg flex items-center justify-center">
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center gap-2 text-sm">
+            <div className="w-5 h-5 bg-accent/10 rounded-md flex items-center justify-center">
               <Users className="h-3 w-3 text-accent" />
             </div>
             Friend Activity
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2 pt-0">
+        <CardContent className="space-y-1 pt-0">
           {friendActivity.map((activity, index) => (
             <div key={index} className="space-y-1 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
               <div className="flex items-center gap-2">
