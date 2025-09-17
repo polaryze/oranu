@@ -24,6 +24,20 @@ html {
   --font-sans: ${GeistSans.variable};
   --font-mono: ${GeistMono.variable};
 }
+
+/* Safari viewport fixes */
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    height: -webkit-fill-available;
+  }
+}
+
+/* Ensure full coverage */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #0A0A0A;
+}
         `}</style>
       </head>
       <body>{children}</body>
