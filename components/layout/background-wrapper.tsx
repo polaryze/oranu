@@ -21,11 +21,11 @@ export function BackgroundWrapper({ children }: BackgroundWrapperProps) {
       {/* Dark Tint Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
       
-      {/* Mobile feathering effect at top - smooth transition to black */}
+      {/* Mobile feathering effect at top - smooth transition to #0A0A0A */}
       <div 
         className="absolute top-0 left-0 right-0 h-32 z-0 pointer-events-none md:hidden"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 25%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0) 100%)'
+          background: 'linear-gradient(to bottom, rgba(10,10,10,1) 0%, rgba(10,10,10,0.8) 25%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.1) 75%, rgba(10,10,10,0) 100%)'
         }}
       ></div>
       
