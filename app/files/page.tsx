@@ -128,24 +128,20 @@ export default function FilesPage() {
 
       <div className="relative z-10 flex flex-col h-screen pb-safe">
         {/* Top Navigation */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b border-border/50 gap-4">
-          <div className="flex items-center gap-2 sm:gap-4">
-            <Link href="/dashboard">
-              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                <LayoutDashboard className="w-4 h-4 mr-2" />
-                Dashboard
-              </Button>
-            </Link>
-            <div className="h-6 w-px bg-border hidden sm:block"></div>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <FolderOpen className="w-4 h-4 text-white" />
-              </div>
-              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                My Files
-              </h1>
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border/50">
+          {/* Oranu Logo - Left */}
+          <Link href="/">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center hover:scale-105 transition-transform duration-200">
+              <span className="text-white font-bold text-lg">O</span>
             </div>
-          </div>
+          </Link>
+          
+          {/* Dashboard Icon - Right */}
+          <Link href="/dashboard">
+            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground p-2">
+              <LayoutDashboard className="w-5 h-5" />
+            </Button>
+          </Link>
         </div>
 
         {/* Files Display Area */}
