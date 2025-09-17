@@ -26,19 +26,19 @@ export function MobileSidebar() {
       <Button
         variant="ghost"
         size="sm"
-        className="fixed bottom-6 right-6 z-50 md:hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white transition-all duration-300 ease-in-out"
+        className="fixed bottom-6 right-6 z-50 md:hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white transition-all duration-300 ease-in-out flex items-center justify-center"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="relative w-5 h-5">
+        <div className="relative w-5 h-5 flex items-center justify-center">
           <Menu 
             className={cn(
-              "absolute inset-0 h-5 w-5 transition-all duration-300 ease-in-out",
+              "absolute h-5 w-5 transition-all duration-300 ease-in-out",
               isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
             )} 
           />
           <X 
             className={cn(
-              "absolute inset-0 h-5 w-5 transition-all duration-300 ease-in-out",
+              "absolute h-5 w-5 transition-all duration-300 ease-in-out",
               isOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"
             )} 
           />
