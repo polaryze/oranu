@@ -72,7 +72,7 @@ export default function LandingPage() {
                 Oranu
               </h1>
             </div>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-white/80 hidden sm:block">
               Master your study habits with simple, effective tools.
             </p>
           </div>
