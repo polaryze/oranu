@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { DynamicGradientBackground } from "@/components/landing/dynamic-gradient"
 import { uploadFile } from "@/lib/file-upload"
+import { LayoutDashboard } from "lucide-react"
 
 export default function LandingPage() {
   const router = useRouter()
@@ -76,7 +77,21 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="shrink-0 flex justify-center lg:justify-end">
-            <div className="relative">
+            {/* Mobile: Dashboard Button */}
+            <div className="lg:hidden">
+              <Link href="/dashboard">
+                <Button 
+                  size="lg" 
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-300 px-8 py-4 text-lg"
+                >
+                  <LayoutDashboard className="w-5 h-5 mr-2" />
+                  Dashboard
+                </Button>
+              </Link>
+            </div>
+
+            {/* Desktop: Drag and Drop Box */}
+            <div className="hidden lg:block relative">
               {/* Development Warning Banner */}
               <div 
                 className="absolute -top-12 left-0 right-0 z-20 bg-yellow-500/20 backdrop-blur-sm border border-yellow-500/30 rounded-lg p-3 text-center cursor-pointer hover:bg-yellow-500/30 transition-colors"
@@ -130,18 +145,14 @@ export default function LandingPage() {
                 </>
               )}
               </div>
+              
+              {/* Error message */}
+              {error && (
+                <div className="mt-3 p-2 bg-red-500/20 border border-red-500/30 rounded text-red-200 text-xs">
+                  {error}
+                </div>
+              )}
             </div>
-            
-            {/* Error message */}
-            {error && (
-              <div className="mt-3 p-2 bg-red-500/20 border border-red-500/30 rounded text-red-200 text-xs">
-                {error}
-              </div>
-            )}
-            
-
-            
-
           </div>
         </div>
       </div>
