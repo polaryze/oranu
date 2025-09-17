@@ -1,0 +1,68 @@
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { LayoutDashboard, Calendar, Brain, TrendingUp, Users, Settings, Menu, X } from "lucide-react"
+
+const navigation = [
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Schedule", href: "/schedule", icon: Calendar },
+  { name: "Study", href: "/study", icon: Brain },
+  { name: "Progress", href: "/progress", icon: TrendingUp },
+  { name: "Friends", href: "/friends", icon: Users },
+  { name: "Settings", href: "/settings", icon: Settings },
+]
+
+export function MobileSidebar() {
+  const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
+
+  return (
+    <>
+      {/* Mobile menu button - Bottom Right */}
+      <Button
+        variant="ghost"
+        size="sm"
+        className="fixed bottom-6 right-6 z-50 md:hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </Button>
+
+      {/* Mobile Sidebar Popup - Bottom Right */}
+      {isOpen && (
+        <div className="fixed bottom-20 right-6 z-40 md:hidden">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 min-w-[200px]">
+            <div className="space-y-2">
+              {navigation.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
+                      isActive
+                        ? "bg-white/20 text-white border border-white/30"
+                        : "text-white/80 hover:bg-white/10 hover:text-white",
+                    )}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <item.icon className="mr-3 h-4 w-4" />
+                    {item.name}
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Overlay for mobile */}
+      {isOpen && <div className="fixed inset-0 z-30 bg-black/20 md:hidden" onClick={() => setIsOpen(false)} />}
+    </>
+  )
+}

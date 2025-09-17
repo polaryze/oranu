@@ -8,6 +8,7 @@ import { SessionForm } from "@/components/schedule/session-form"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Calendar, Plus, LayoutDashboard } from "lucide-react"
 import Link from "next/link"
+import { BackgroundWrapper } from "@/components/layout/background-wrapper"
 
 const AuthGuard = dynamic(() => import("@/components/auth/auth-guard").then(mod => ({ default: mod.AuthGuard })), {
   ssr: false,
@@ -29,22 +30,15 @@ export default function SchedulePage() {
 
   return (
     <AuthGuard>
-      <div className="h-screen bg-gradient-to-br from-background via-background to-muted/10 flex flex-col">
-        {/* Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-accent/5 rounded-full blur-2xl"></div>
-          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-10 flex h-full">
+      <BackgroundWrapper>
+        <div className="flex h-full">
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col">
             {/* Top Navigation */}
-            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border/50">
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-white/20">
               {/* Oranu Logo - Left */}
               <Link href="/">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center hover:scale-105 transition-transform duration-200">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center sm:hover:scale-105 transition-transform duration-200">
                   <span className="text-white font-bold text-lg">O</span>
                 </div>
               </Link>
@@ -52,7 +46,7 @@ export default function SchedulePage() {
               {/* Right side - Dashboard and New Session */}
               <div className="flex items-center gap-2">
                 <Link href="/dashboard">
-                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground p-2">
+                  <Button variant="ghost" size="sm" className="text-white/80 sm:hover:text-white p-2">
                     <LayoutDashboard className="w-5 h-5" />
                   </Button>
                 </Link>
@@ -89,7 +83,7 @@ export default function SchedulePage() {
             <SessionForm onClose={() => setShowSessionForm(false)} onSave={handleSaveSession} />
           </div>
         )}
-      </div>
+      </BackgroundWrapper>
     </AuthGuard>
   )
 }

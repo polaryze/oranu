@@ -42,8 +42,8 @@ export function RecentActivity() {
       <Card className="bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 transition-all duration-300 h-full">
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-sm text-white">
-            <div className="w-5 h-5 bg-blue-500/20 rounded-md flex items-center justify-center">
-              <BookOpen className="h-3 w-3 text-blue-400" />
+            <div className="w-4 h-4 bg-blue-500/20 rounded-md flex items-center justify-center">
+              <BookOpen className="h-2.5 w-2.5 text-blue-400" />
             </div>
             Recent Sessions
           </CardTitle>
@@ -75,8 +75,8 @@ export function RecentActivity() {
       <Card className="bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 transition-all duration-300 h-full">
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-sm text-white">
-            <div className="w-5 h-5 bg-purple-500/20 rounded-md flex items-center justify-center">
-              <Users className="h-3 w-3 text-purple-400" />
+            <div className="w-4 h-4 bg-purple-500/20 rounded-md flex items-center justify-center">
+              <Users className="h-2.5 w-2.5 text-purple-400" />
             </div>
             Friend Activity
           </CardTitle>
