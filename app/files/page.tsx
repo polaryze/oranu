@@ -126,212 +126,179 @@ export default function FilesPage() {
         <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 flex flex-col lg:flex-row h-screen">
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col">
-          {/* Top Navigation */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b border-border/50 gap-4">
-            <div className="flex items-center gap-2 sm:gap-4">
-              <Link href="/dashboard">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                  <LayoutDashboard className="w-4 h-4 mr-2" />
-                  Dashboard
-                </Button>
-              </Link>
-              <div className="h-6 w-px bg-border hidden sm:block"></div>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                  <FolderOpen className="w-4 h-4 text-white" />
-                </div>
-                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                  My Files
-                </h1>
+      <div className="relative z-10 flex flex-col h-screen">
+        {/* Top Navigation */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b border-border/50 gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Link href="/dashboard">
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                <LayoutDashboard className="w-4 h-4 mr-2" />
+                Dashboard
+              </Button>
+            </Link>
+            <div className="h-6 w-px bg-border hidden sm:block"></div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                <FolderOpen className="w-4 h-4 text-white" />
               </div>
-            </div>
-            
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="hover:bg-primary/10 hover:border-primary/30 w-full sm:w-auto"
-              onClick={() => setShowUploadModal(true)}
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Upload Files
-            </Button>
-          </div>
-
-          {/* Main Content */}
-          <div className="flex-1 p-4 sm:p-6 overflow-auto">
-
-            {/* Error message */}
-            {error && (
-              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-                <p className="text-red-600">{error}</p>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={() => setError(null)}
-                  className="mt-2 text-red-600 hover:text-red-700"
-                >
-                  Dismiss
-                </Button>
-              </div>
-            )}
-
-            {/* Main AI Schedule Creation Area */}
-            <div className="max-w-4xl mx-auto">
-              {files.length > 0 ? (
-                <div className="relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 rounded-3xl"></div>
-                  <div className="relative p-4 sm:p-6 border border-primary/20 rounded-2xl backdrop-blur-sm">
-                    <div className="text-center space-y-4">
-                      <div className="space-y-3">
-                        <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center mx-auto">
-                          <Sparkles className="w-6 h-6 text-white" />
-                        </div>
-                        <h2 className="text-lg sm:text-xl font-bold text-foreground">
-                          Ready to Create Your Study Plan?
-                        </h2>
-                        <p className="text-muted-foreground text-sm max-w-md mx-auto">
-                          AI will analyze your {files.length} files and create a personalized study schedule.
-                        </p>
-                      </div>
-                      
-                      <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                          <span>{files.length} files ready</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          <span>2-3 min</span>
-                        </div>
-                      </div>
-                      
-                      <Link href="/schedule">
-                        <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-2 text-sm w-full sm:w-auto">
-                          <Sparkles className="w-4 h-4 mr-2" />
-                          Create AI Study Plan
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center py-12 sm:py-20">
-                  <div className="mb-6 sm:mb-8">
-                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl flex items-center justify-center mx-auto mb-4">
-                      <Upload className="w-10 h-10 sm:w-12 sm:h-12 text-primary" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Upload Files to Get Started</h3>
-                  <p className="text-muted-foreground text-base sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto">
-                    Upload your study materials to create an AI-powered study plan
-                  </p>
-                  <Button 
-                    size="lg" 
-                    className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 w-full sm:w-auto"
-                    onClick={() => setShowUploadModal(true)}
-                  >
-                    <Upload className="w-5 h-5 mr-2" />
-                    Upload Your First Files
-                  </Button>
-                </div>
-              )}
+              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
+                My Files
+              </h1>
             </div>
           </div>
         </div>
 
-        {/* Files Bento Box - Mobile: Full width, Desktop: Fixed width */}
-        <div className="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-border/50 bg-card/30 backdrop-blur-sm">
-          <div className="p-4 sm:p-6 border-b border-border/50">
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <h3 className="text-base sm:text-lg font-semibold text-foreground">Your Files</h3>
-              <div className="text-xs sm:text-sm text-muted-foreground bg-muted/50 px-2 py-1 rounded-full">
-                {files.length}
-              </div>
+        {/* Files Display Area */}
+        <div className="flex-1 overflow-auto p-4 sm:p-6">
+          {/* Error message */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+              <p className="text-red-600">{error}</p>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setError(null)}
+                className="mt-2 text-red-600 hover:text-red-700"
+              >
+                Dismiss
+              </Button>
             </div>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Uploaded study materials ready for AI processing
-            </p>
-          </div>
-          
-          <div className="flex-1 overflow-auto p-4 sm:p-6 max-h-96 lg:max-h-none">
-            {files.length === 0 ? (
-              <div className="text-center py-6 sm:py-8">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-muted/50 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground" />
+          )}
+
+          {files.length === 0 ? (
+            <div className="text-center py-12 sm:py-20">
+              <div className="mb-6 sm:mb-8">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                  <Upload className="w-10 h-10 sm:w-12 sm:h-12 text-primary" />
                 </div>
-                <p className="text-xs sm:text-sm text-muted-foreground">No files uploaded yet</p>
               </div>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-3 sm:gap-4">
-                {files.map((file, index) => (
-                  <div 
-                    key={file.id} 
-                    className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border/30 rounded-xl hover:border-primary/30 hover:shadow-lg transition-all duration-300 aspect-square"
-                    style={{animationDelay: `${index * 50}ms`}}
-                  >
-                    <div className="p-3 sm:p-4 h-full flex flex-col">
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="relative">
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            {getFileIcon(file.type)}
-                          </div>
-                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border border-card"></div>
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">Upload Files to Get Started</h3>
+              <p className="text-muted-foreground text-base sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto">
+                Upload your study materials to create an AI-powered study plan
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              {files.map((file, index) => (
+                <div 
+                  key={file.id} 
+                  className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border/30 rounded-xl hover:border-primary/30 hover:shadow-lg transition-all duration-300 aspect-square"
+                  style={{animationDelay: `${index * 50}ms`}}
+                >
+                  <div className="p-3 sm:p-4 h-full flex flex-col">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="relative">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          {getFileIcon(file.type)}
                         </div>
-                        
-                        <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <a 
-                            href={file.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="p-1 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded transition-colors"
-                            title="View file"
-                          >
-                            <Eye className="w-3 h-3" />
-                          </a>
-                          <a 
-                            href={file.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="p-1 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                            title="Download file"
-                          >
-                            <Download className="w-3 h-3" />
-                          </a>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleDeleteFile(file.id)}
-                            disabled={deletingFile === file.id}
-                            className="p-1 text-red-500 hover:text-red-600 hover:bg-red-500/10 rounded h-auto"
-                            title="Delete file"
-                          >
-                            {deletingFile === file.id ? (
-                              <div className="w-3 h-3 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
-                            ) : (
-                              <Trash2 className="w-3 h-3" />
-                            )}
-                          </Button>
+                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border border-card"></div>
+                      </div>
+                      
+                      <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a 
+                          href={file.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="p-1 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded transition-colors"
+                          title="View file"
+                        >
+                          <Eye className="w-3 h-3" />
+                        </a>
+                        <a 
+                          href={file.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="p-1 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
+                          title="Download file"
+                        >
+                          <Download className="w-3 h-3" />
+                        </a>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteFile(file.id)}
+                          disabled={deletingFile === file.id}
+                          className="p-1 text-red-500 hover:text-red-600 hover:bg-red-500/10 rounded h-auto"
+                          title="Delete file"
+                        >
+                          {deletingFile === file.id ? (
+                            <div className="w-3 h-3 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+                          ) : (
+                            <Trash2 className="w-3 h-3" />
+                          )}
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h4 className="font-medium text-foreground text-xs sm:text-sm line-clamp-2 mb-1">{file.name}</h4>
+                        <div className="text-xs text-muted-foreground">
+                          {formatFileSize(file.size)}
                         </div>
                       </div>
                       
-                      <div className="flex-1 flex flex-col justify-between">
-                        <div>
-                          <h4 className="font-medium text-foreground text-xs sm:text-sm line-clamp-2 mb-1">{file.name}</h4>
-                          <div className="text-xs text-muted-foreground">
-                            {formatFileSize(file.size)}
-                          </div>
-                        </div>
-                        
-                        <div className="text-xs text-muted-foreground mt-2">
-                          {formatDate(file.uploaded_at)}
-                        </div>
+                      <div className="text-xs text-muted-foreground mt-2">
+                        {formatDate(file.uploaded_at)}
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Bottom Action Bar */}
+        <div className="border-t border-border/50 bg-card/30 backdrop-blur-sm p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-4xl mx-auto">
+            {files.length > 0 ? (
+              <>
+                <div className="flex-1">
+                  <div className="text-center sm:text-left">
+                    <div className="flex items-center justify-center sm:justify-start gap-2 text-sm text-muted-foreground mb-2">
+                      <div className="flex items-center gap-1">
+                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                        <span>{files.length} files ready</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        <span>2-3 min processing</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      AI will analyze your files and create a personalized study schedule
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="hover:bg-primary/10 hover:border-primary/30 flex-1 sm:flex-none"
+                    onClick={() => setShowUploadModal(true)}
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Upload More
+                  </Button>
+                  <Link href="/schedule" className="flex-1 sm:flex-none">
+                    <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 w-full">
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      Create AI Study Plan
+                    </Button>
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <div className="w-full">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 w-full"
+                  onClick={() => setShowUploadModal(true)}
+                >
+                  <Upload className="w-5 h-5 mr-2" />
+                  Upload Your First Files
+                </Button>
               </div>
             )}
           </div>
