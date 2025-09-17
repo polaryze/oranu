@@ -64,9 +64,9 @@ export default function LandingPage() {
               Master your study habits with simple, effective tools.
             </p>
           </div>
-          <div className="shrink-0 w-full max-w-sm lg:max-w-none">
+          <div className="shrink-0 flex justify-center lg:justify-end">
             <div 
-              className="w-full max-w-72 h-60 border-2 border-dashed border-white/30 rounded-lg bg-white/5 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center transition-all duration-200 hover:border-white/50 hover:bg-white/10"
+              className="w-72 h-60 border-2 border-dashed border-white/30 rounded-lg bg-white/5 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center transition-all duration-200 hover:border-white/50 hover:bg-white/10"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
             >
