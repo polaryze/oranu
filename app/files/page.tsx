@@ -197,12 +197,9 @@ export default function FilesPage() {
                 </div>
               ) : (
                 <div className="text-center py-20">
-                  <div className="relative mb-8">
+                  <div className="mb-8">
                     <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl flex items-center justify-center mx-auto mb-4">
                       <Upload className="w-12 h-12 text-primary" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-accent to-secondary rounded-full flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-white" />
                     </div>
                   </div>
                   <h3 className="text-3xl font-bold text-foreground mb-4">Upload Files to Get Started</h3>
