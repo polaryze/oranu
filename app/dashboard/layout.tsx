@@ -16,9 +16,27 @@ export default function DashboardLayout({
 }) {
   return (
     <AuthGuard>
-      <div className="h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-        {/* Simplified background for testing */}
-        <div className="absolute inset-0 bg-black/20"></div>
+      <div className="h-screen relative overflow-hidden">
+        {/* Wallpaper Background */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/images/wallpaper.webp)',
+            backgroundColor: '#1a1a1a', // Fallback color
+          }}
+        ></div>
+        
+        {/* Dark Tint Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        {/* Additional Blur Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-500/5 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-indigo-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 right-1/3 w-28 h-28 bg-cyan-500/5 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-1/3 right-10 w-36 h-36 bg-emerald-500/5 rounded-full blur-3xl"></div>
+        </div>
 
         <div className="relative z-10 flex h-full">
           <Sidebar />
