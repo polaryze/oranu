@@ -126,7 +126,7 @@ export default function FilesPage() {
         <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-secondary/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 flex flex-col h-screen">
+      <div className="relative z-10 flex flex-col h-screen pb-safe">
         {/* Top Navigation */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b border-border/50 gap-4">
           <div className="flex items-center gap-2 sm:gap-4">
@@ -250,7 +250,7 @@ export default function FilesPage() {
         </div>
 
         {/* Bottom Action Bar */}
-        <div className="border-t border-border/50 bg-card/30 backdrop-blur-sm p-4 sm:p-6">
+        <div className="border-t border-border/50 bg-card/30 backdrop-blur-sm p-4 sm:p-6 pb-12 sm:pb-6 mb-4 sm:mb-0">
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-4xl mx-auto">
             {files.length > 0 ? (
               <>
