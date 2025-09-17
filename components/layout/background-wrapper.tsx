@@ -21,6 +21,9 @@ export function BackgroundWrapper({ children }: BackgroundWrapperProps) {
       {/* Dark Tint Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
       
+      {/* Mobile fade effect at top - applied to background */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/80 to-transparent z-0 pointer-events-none md:hidden"></div>
+      
       {/* Additional Blur Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl"></div>

@@ -22,21 +22,10 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile menu button */}
-      <Button
-        variant="ghost"
-        size="sm"
-        className="fixed top-6 left-6 z-50 md:hidden bg-card/50 backdrop-blur-sm border border-border/50"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-      </Button>
-
-      {/* Floating Sidebar */}
+      {/* Floating Sidebar - Desktop Only */}
       <div
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-72 transform transition-all duration-300 ease-in-out md:translate-x-0",
-          isOpen ? "translate-x-0" : "-translate-x-full",
+          "hidden md:block fixed inset-y-0 left-0 z-40 w-72 transform transition-all duration-300 ease-in-out",
         )}
       >
         <div className="h-full p-6">

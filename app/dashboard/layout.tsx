@@ -25,9 +25,7 @@ export default function DashboardLayout({
           
           {/* Main Content */}
           <main className="flex-1 ml-0 md:ml-72">
-            <div className="h-full md:h-full min-h-full p-4 lg:p-6 relative">
-              {/* Mobile fade effect at top */}
-              <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none md:hidden"></div>
+            <div className="h-full md:h-full min-h-full pt-8 md:pt-4 pb-4 px-4 lg:px-6 relative">
               {children}
             </div>
           </main>
