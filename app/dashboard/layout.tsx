@@ -22,11 +22,17 @@ export default function DashboardLayout({
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: 'url(/images/wallpaper.png)',
+            backgroundColor: '#1a1a1a', // Fallback color
           }}
-        ></div>
+        >
+          {/* Debug: Test if image loads */}
+          <div className="absolute top-4 left-4 text-white text-xs bg-black/50 px-2 py-1 rounded">
+            Wallpaper Test
+          </div>
+        </div>
         
         {/* Dark Tint Overlay */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
         
         {/* Additional Blur Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
