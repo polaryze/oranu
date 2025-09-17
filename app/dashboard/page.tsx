@@ -1,39 +1,27 @@
-import { Button } from "@/components/ui/button"
 import { OverviewCards } from "@/components/dashboard/overview-cards"
 import { RecentActivity } from "@/components/dashboard/recent-activity"
-import { Play, Plus } from "lucide-react"
 
 export default function DashboardPage() {
   return (
-    <div className="max-w-7xl mx-auto space-y-8">
-      {/* Header */}
-      <div className="text-center space-y-4">
-        <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-          Welcome back!
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Ready to continue your study journey? Let's make today productive.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-lg hover:shadow-xl transition-all duration-300">
-            <Play className="mr-2 h-5 w-5" />
-            Quick Study
-          </Button>
-          <Button variant="outline" size="lg" className="border-border/50 hover:bg-muted/50">
-            <Plus className="mr-2 h-5 w-5" />
-            Schedule Session
-          </Button>
+    <div className="h-screen bg-gradient-to-br from-background via-background to-muted/20 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-60 left-20 w-32 h-32 bg-accent/5 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-40 right-1/4 w-36 h-36 bg-secondary/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/3 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative z-10 h-full max-w-7xl mx-auto flex flex-col p-4 lg:p-6">
+        {/* Overview Cards */}
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6">
+          <OverviewCards />
         </div>
-      </div>
 
-      {/* Overview Cards */}
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        <OverviewCards />
-      </div>
-
-      {/* Recent Activity */}
-      <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
-        <RecentActivity />
+        {/* Recent Activity */}
+        <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 flex-1 min-h-0">
+          <RecentActivity />
+        </div>
       </div>
     </div>
   )

@@ -26,7 +26,7 @@ export default function DashboardLayout({
 
         <div className="relative z-10 flex h-screen">
           <Sidebar />
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto ml-0 md:ml-72">
             <div className="p-6 lg:p-8">{children}</div>
           </main>
         </div>
