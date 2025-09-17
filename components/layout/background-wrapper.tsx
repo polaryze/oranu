@@ -8,7 +8,18 @@ interface BackgroundWrapperProps {
 
 export function BackgroundWrapper({ children }: BackgroundWrapperProps) {
   return (
-    <div className="h-screen md:h-screen min-h-screen relative overflow-auto md:overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
+    <div 
+      className="h-screen md:h-screen min-h-screen relative overflow-auto md:overflow-hidden" 
+      style={{ 
+        backgroundColor: '#0A0A0A',
+        minHeight: '100vh',
+        minHeight: '100dvh', // Dynamic viewport height for mobile Safari
+        paddingTop: 'env(safe-area-inset-top)',
+        paddingBottom: 'env(safe-area-inset-bottom)',
+        paddingLeft: 'env(safe-area-inset-left)',
+        paddingRight: 'env(safe-area-inset-right)'
+      }}
+    >
       {/* Wallpaper Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"

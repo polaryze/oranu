@@ -119,9 +119,25 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
+  
+  html, body {
     @apply bg-background text-foreground;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* Safari safe area handling */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
+  
+  /* Ensure full viewport coverage */
+  #__next {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+  
   ::selection {
     background-color: #ff6b35;
   }
