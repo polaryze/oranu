@@ -26,29 +26,43 @@ export function MobileSidebar() {
       <Button
         variant="ghost"
         size="sm"
-        className="fixed bottom-6 right-6 z-50 md:hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white"
+        className="fixed bottom-6 right-6 z-50 md:hidden bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 text-white transition-all duration-300 ease-in-out"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        <div className="relative w-5 h-5">
+          <Menu 
+            className={cn(
+              "absolute inset-0 h-5 w-5 transition-all duration-300 ease-in-out",
+              isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+            )} 
+          />
+          <X 
+            className={cn(
+              "absolute inset-0 h-5 w-5 transition-all duration-300 ease-in-out",
+              isOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"
+            )} 
+          />
+        </div>
       </Button>
 
       {/* Mobile Sidebar Popup - Bottom Right */}
       {isOpen && (
-        <div className="fixed bottom-20 right-6 z-40 md:hidden">
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 min-w-[200px]">
+        <div className="fixed bottom-20 right-6 z-40 md:hidden animate-in slide-in-from-bottom-2 fade-in duration-300">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 min-w-[200px] animate-in zoom-in-95 duration-300">
             <div className="space-y-2">
-              {navigation.map((item) => {
+              {navigation.map((item, index) => {
                 const isActive = pathname === item.href
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
+                      "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 animate-in slide-in-from-right-2 fade-in",
                       isActive
                         ? "bg-white/20 text-white border border-white/30"
                         : "text-white/80 hover:bg-white/10 hover:text-white",
                     )}
+                    style={{ animationDelay: `${index * 50}ms` }}
                     onClick={() => setIsOpen(false)}
                   >
                     <item.icon className="mr-3 h-4 w-4" />
@@ -62,7 +76,7 @@ export function MobileSidebar() {
       )}
 
       {/* Overlay for mobile */}
-      {isOpen && <div className="fixed inset-0 z-30 bg-black/20 md:hidden" onClick={() => setIsOpen(false)} />}
+      {isOpen && <div className="fixed inset-0 z-30 bg-black/20 md:hidden animate-in fade-in duration-300" onClick={() => setIsOpen(false)} />}
     </>
   )
 }
