@@ -41,42 +41,29 @@ export default function SchedulePage() {
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col">
             {/* Top Navigation */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b border-border/50 gap-4">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                <div className="flex items-center gap-2 sm:gap-4">
-                  <Link href="/files">
-                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                      <ArrowLeft className="w-4 h-4 mr-2" />
-                      <span className="hidden sm:inline">Back to Files</span>
-                      <span className="sm:hidden">Back</span>
-                    </Button>
-                  </Link>
-                  <div className="h-6 w-px bg-border hidden sm:block"></div>
-                  <Link href="/dashboard">
-                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                      <LayoutDashboard className="w-4 h-4 mr-2" />
-                      Dashboard
-                    </Button>
-                  </Link>
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border/50">
+              {/* Oranu Logo - Left */}
+              <Link href="/">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center hover:scale-105 transition-transform duration-200">
+                  <span className="text-white font-bold text-lg">O</span>
                 </div>
-                <div className="h-6 w-px bg-border hidden sm:block"></div>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                    <Calendar className="w-4 h-4 text-white" />
-                  </div>
-                  <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                    Study Schedule
-                  </h1>
-                </div>
-              </div>
+              </Link>
               
-              <Button 
-                onClick={handleCreateSession}
-                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-lg w-full sm:w-auto"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                New Session
-              </Button>
+              {/* Right side - Dashboard and New Session */}
+              <div className="flex items-center gap-2">
+                <Link href="/dashboard">
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground p-2">
+                    <LayoutDashboard className="w-5 h-5" />
+                  </Button>
+                </Link>
+                <Button 
+                  onClick={handleCreateSession}
+                  className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-lg"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  <span className="hidden sm:inline">New Session</span>
+                </Button>
+              </div>
             </div>
 
             {/* Main Content - Side by Side Layout */}

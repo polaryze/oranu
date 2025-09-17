@@ -129,19 +129,19 @@ export default function FilesPage() {
       <div className="relative z-10 flex flex-col h-screen pb-safe">
         {/* Top Navigation */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-border/50">
-          {/* Oranu Logo - Left */}
-          <Link href="/">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center hover:scale-105 transition-transform duration-200">
-              <span className="text-white font-bold text-lg">O</span>
-            </div>
-          </Link>
-          
-          {/* Dashboard Icon - Right */}
-          <Link href="/dashboard">
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground p-2">
-              <LayoutDashboard className="w-5 h-5" />
-            </Button>
-          </Link>
+            {/* Oranu Logo - Left */}
+            <Link href="/">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center sm:hover:scale-105 transition-transform duration-200">
+                <span className="text-white font-bold text-lg">O</span>
+              </div>
+            </Link>
+            
+            {/* Dashboard Icon - Right */}
+            <Link href="/dashboard">
+              <Button variant="ghost" size="sm" className="text-muted-foreground sm:hover:text-foreground p-2">
+                <LayoutDashboard className="w-5 h-5" />
+              </Button>
+            </Link>
         </div>
 
         {/* Files Display Area */}

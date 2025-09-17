@@ -26,59 +26,66 @@ export function Sidebar() {
       <Button
         variant="ghost"
         size="sm"
-        className="fixed top-4 left-4 z-50 md:hidden"
+        className="fixed top-6 left-6 z-50 md:hidden bg-card/50 backdrop-blur-sm border border-border/50"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </Button>
 
-      {/* Sidebar */}
+      {/* Floating Sidebar */}
       <div
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 bg-card border-r transform transition-transform duration-200 ease-in-out md:translate-x-0",
+          "fixed inset-y-0 left-0 z-40 w-72 transform transition-all duration-300 ease-in-out md:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="flex flex-col h-full">
-          {/* Logo */}
-          <div className="flex items-center justify-center h-16 border-b">
-            <Link href="/" className="text-2xl font-bold text-primary">
-              Oranu
-            </Link>
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 px-4 py-6 space-y-2">
-            {navigation.map((item) => {
-              const isActive = pathname === item.href
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors",
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                  )}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <item.icon className="mr-3 h-5 w-5" />
-                  {item.name}
+        <div className="h-full p-6">
+          <div className="h-full bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden">
+            <div className="flex flex-col h-full">
+              {/* Logo */}
+              <div className="flex items-center justify-center h-20 border-b border-border/50">
+                <Link href="/" className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">O</span>
+                  </div>
+                  <span className="text-xl font-bold text-foreground">Oranu</span>
                 </Link>
-              )
-            })}
-          </nav>
-
-          {/* User section */}
-          <div className="p-4 border-t">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-primary-foreground">U</span>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">Student User</p>
-                <p className="text-xs text-muted-foreground truncate">student@example.com</p>
+
+              {/* Navigation */}
+              <nav className="flex-1 px-6 py-8 space-y-3">
+                {navigation.map((item) => {
+                  const isActive = pathname === item.href
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={cn(
+                        "flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200",
+                        isActive
+                          ? "bg-primary/10 text-primary border border-primary/20"
+                          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+                      )}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <item.icon className="mr-3 h-5 w-5" />
+                      {item.name}
+                    </Link>
+                  )
+                })}
+              </nav>
+
+              {/* User section */}
+              <div className="p-6 border-t border-border/50">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+                    <span className="text-sm font-medium text-white">U</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate text-foreground">Student User</p>
+                    <p className="text-xs text-muted-foreground truncate">student@example.com</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
