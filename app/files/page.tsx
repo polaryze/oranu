@@ -103,15 +103,6 @@ export default function FilesPage() {
                   Dashboard
                 </Button>
               </Link>
-              <div className="h-6 w-px bg-border"></div>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-white" />
-                </div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                  AI Study Planner
-                </h1>
-              </div>
             </div>
             
             <Link href="/">
