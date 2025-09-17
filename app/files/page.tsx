@@ -252,7 +252,7 @@ export default function FilesPage() {
               <>
                 <div className="flex-1">
                   <div className="text-center sm:text-left">
-                    <div className="flex items-center justify-center sm:justify-start gap-2 text-sm text-muted-foreground mb-2">
+                    <div className="flex items-center justify-center sm:justify-start gap-2 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                         <span>{files.length} files ready</span>
@@ -262,9 +262,6 @@ export default function FilesPage() {
                         <span>2-3 min processing</span>
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      AI will analyze your files and create a personalized study schedule
-                    </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
