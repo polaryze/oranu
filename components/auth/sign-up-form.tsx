@@ -100,7 +100,7 @@ export function SignUpForm() {
             {loading ? "Creating Account..." : "Create Account"}
           </Button>
         </form>
-        <div className="mt-6 grid grid-cols-2 gap-3">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Button type="button" variant="outline" onClick={() => handleOAuth("google")} disabled={loading} className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
             Continue with Google
           </Button>

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Oranu',
   description: 'Study, your way',
   generator: 'oranu.ai',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
 }
 
 export default function RootLayout({

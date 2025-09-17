@@ -19,7 +19,7 @@ export default function DashboardLayout({
       <div className="flex h-screen bg-background">
         <Sidebar />
         <main className="flex-1 md:ml-64 overflow-auto">
-          <div className="p-6 pt-16 md:pt-6">{children}</div>
+          <div className="p-4 sm:p-6 pt-16 md:pt-6">{children}</div>
         </main>
       </div>
     </AuthGuard>

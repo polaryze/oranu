@@ -47,16 +47,16 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center px-6 relative overflow-hidden">
+    <div className="min-h-screen flex items-center px-4 sm:px-6 relative overflow-hidden">
       <DynamicGradientBackground />
       <div className="relative z-10 mx-auto w-full max-w-4xl">
-        <div className="flex w-full items-center justify-between gap-12">
-          <div className="max-w-lg space-y-4">
-            <div className="flex items-center gap-3">
+        <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-8 lg:gap-12">
+          <div className="max-w-lg space-y-4 text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start gap-3">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-white/10">
                 <span className="text-white font-bold text-lg">O</span>
               </div>
-              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
                 Oranu
               </h1>
             </div>
@@ -64,9 +64,9 @@ export default function LandingPage() {
               Master your study habits with simple, effective tools.
             </p>
           </div>
-          <div className="shrink-0">
+          <div className="shrink-0 w-full max-w-sm lg:max-w-none">
             <div 
-              className="w-72 h-60 border-2 border-dashed border-white/30 rounded-lg bg-white/5 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center transition-all duration-200 hover:border-white/50 hover:bg-white/10"
+              className="w-full h-60 border-2 border-dashed border-white/30 rounded-lg bg-white/5 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center transition-all duration-200 hover:border-white/50 hover:bg-white/10"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
             >

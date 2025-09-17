@@ -37,7 +37,7 @@ const friendActivity = [
 
 export function RecentActivity() {
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
       {/* Recent Study Sessions */}
       <Card>
         <CardHeader>
@@ -48,11 +48,11 @@ export function RecentActivity() {
         </CardHeader>
         <CardContent className="space-y-4">
           {recentSessions.map((session) => (
-            <div key={session.id} className="flex items-center justify-between">
+            <div key={session.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div className="space-y-1">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                   <span className="font-medium">{session.subject}</span>
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge variant="secondary" className="text-xs w-fit">
                     {session.technique}
                   </Badge>
                 </div>
@@ -61,7 +61,7 @@ export function RecentActivity() {
                   {session.duration} • {session.time}
                 </div>
               </div>
-              <Badge variant={session.completed ? "default" : "outline"}>
+              <Badge variant={session.completed ? "default" : "outline"} className="w-fit">
                 {session.completed ? "Completed" : "Incomplete"}
               </Badge>
             </div>

@@ -80,17 +80,17 @@ export default function FilesPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">My Files</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">My Files</h1>
             <p className="text-muted-foreground mt-2">
               Manage your uploaded study materials and create your schedule
             </p>
           </div>
           <Link href="/dashboard">
-            <Button variant="outline">
+            <Button variant="outline" className="w-full sm:w-auto">
               Back to Dashboard
             </Button>
           </Link>
@@ -113,10 +113,10 @@ export default function FilesPage() {
 
         {/* Make Schedule Button */}
         {files.length > 0 && (
-          <div className="mb-8 p-6 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg">
-            <div className="flex items-center justify-between">
+          <div className="mb-8 p-4 sm:p-6 bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-lg">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-2">
+                <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-2">
                   Ready to organize your study schedule?
                 </h2>
                 <p className="text-muted-foreground">
@@ -124,7 +124,7 @@ export default function FilesPage() {
                 </p>
               </div>
               <Link href="/schedule">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 w-full sm:w-auto">
                   <Calendar className="w-5 h-5 mr-2" />
                   Make My Schedule
                 </Button>
@@ -155,17 +155,17 @@ export default function FilesPage() {
             {files.map((file) => (
               <div 
                 key={file.id} 
-                className="flex items-center justify-between p-4 bg-card border border-border rounded-lg hover:shadow-sm transition-shadow"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-card border border-border rounded-lg hover:shadow-sm transition-shadow gap-4"
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center">
                     {getFileIcon(file.type)}
                   </div>
-                  <div>
-                    <h3 className="font-medium text-foreground">{file.name}</h3>
-                    <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-medium text-foreground truncate">{file.name}</h3>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-sm text-muted-foreground gap-1 sm:gap-0">
                       <span>{formatFileSize(file.size)}</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>{formatDate(file.uploaded_at)}</span>
                     </div>
                   </div>

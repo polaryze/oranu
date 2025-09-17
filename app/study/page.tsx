@@ -60,7 +60,7 @@ export default function StudyPage() {
         ) : (
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold">Study Techniques</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold">Study Techniques</h1>
               <p className="text-muted-foreground">Choose a study technique to start your focused learning session</p>
             </div>
             <TechniqueSelector onSelect={handleTechniqueSelect} />

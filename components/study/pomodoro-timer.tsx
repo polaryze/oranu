@@ -105,7 +105,7 @@ export function PomodoroTimer({ onComplete }: { onComplete: () => void }) {
       <CardContent className="space-y-6">
         {/* Timer Display */}
         <div className="text-center">
-          <div className="text-6xl font-mono font-bold text-primary mb-2">{formatTime(timeLeft)}</div>
+          <div className="text-4xl sm:text-6xl font-mono font-bold text-primary mb-2">{formatTime(timeLeft)}</div>
           <Progress value={progress} className="w-full" />
         </div>
 
@@ -120,19 +120,21 @@ export function PomodoroTimer({ onComplete }: { onComplete: () => void }) {
         </div>
 
         {/* Controls */}
-        <div className="flex justify-center gap-2">
-          <Button onClick={toggleTimer} size="lg">
+        <div className="flex flex-col sm:flex-row justify-center gap-2">
+          <Button onClick={toggleTimer} size="lg" className="w-full sm:w-auto">
             {isRunning ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
             {isRunning ? "Pause" : "Start"}
           </Button>
-          <Button onClick={resetTimer} variant="outline" size="lg">
-            <RotateCcw className="h-4 w-4 mr-2" />
-            Reset
-          </Button>
-          <Button onClick={stopSession} variant="outline" size="lg">
-            <Square className="h-4 w-4 mr-2" />
-            Stop
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={resetTimer} variant="outline" size="lg" className="flex-1 sm:flex-none">
+              <RotateCcw className="h-4 w-4 mr-2" />
+              Reset
+            </Button>
+            <Button onClick={stopSession} variant="outline" size="lg" className="flex-1 sm:flex-none">
+              <Square className="h-4 w-4 mr-2" />
+              Stop
+            </Button>
+          </div>
         </div>
 
         {/* Phase Info */}

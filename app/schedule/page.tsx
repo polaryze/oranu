@@ -28,7 +28,7 @@ export default function SchedulePage() {
     <AuthGuard>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Schedule</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">Schedule</h1>
           <p className="text-muted-foreground">Plan and manage your study sessions</p>
         </div>
 
