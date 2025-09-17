@@ -79,7 +79,7 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
 
     // Empty cells for days before the first day of the month
     for (let i = 0; i < firstDayOfWeek; i++) {
-      days.push(<div key={`empty-${i}`} className="h-16 rounded-lg" />)
+      days.push(<div key={`empty-${i}`} className="h-12 sm:h-16 rounded-lg" />)
     }
 
     // Days of the month
@@ -92,13 +92,14 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
       days.push(
         <div
           key={day}
-          className={`h-16 rounded-lg p-2 flex flex-col ${isToday ? "bg-primary/10 border border-primary/30" : "hover:bg-muted/30 border border-transparent hover:border-border/50"}`}
+          className={`h-12 sm:h-16 rounded-lg p-1 sm:p-2 flex flex-col ${isToday ? "bg-primary/10 border border-primary/30" : "hover:bg-muted/30 border border-transparent hover:border-border/50"}`}
         >
           <div className={`text-xs font-medium ${isToday ? "text-primary" : "text-foreground"}`}>{day}</div>
           <div className="flex-1 flex flex-col justify-end space-y-0.5">
             {sessions.slice(0, 1).map((session) => (
-              <div key={session.id} className="text-xs p-1 rounded bg-primary/20 text-primary truncate">
-                {session.time} {session.subject}
+              <div key={session.id} className="text-xs p-0.5 sm:p-1 rounded bg-primary/20 text-primary truncate">
+                <span className="hidden sm:inline">{session.time} {session.subject}</span>
+                <span className="sm:hidden">{session.time}</span>
               </div>
             ))}
             {sessions.length > 1 && (
@@ -115,25 +116,27 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
   return (
     <div className="h-full bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden">
       {/* Calendar Header */}
-      <div className="p-4 border-b border-border/50">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={() => navigateMonth("prev")} className="hover:bg-primary/10">
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <h2 className="text-lg font-semibold text-foreground">
-              {months[currentMonth]} {currentYear}
-            </h2>
-            <Button variant="ghost" size="sm" onClick={() => navigateMonth("next")} className="hover:bg-primary/10">
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+      <div className="p-3 sm:p-4 border-b border-border/50">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="flex items-center justify-between sm:justify-start gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Button variant="ghost" size="sm" onClick={() => navigateMonth("prev")} className="hover:bg-primary/10">
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <h2 className="text-base sm:text-lg font-semibold text-foreground">
+                {months[currentMonth]} {currentYear}
+              </h2>
+              <Button variant="ghost" size="sm" onClick={() => navigateMonth("next")} className="hover:bg-primary/10">
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
-          <div className="flex rounded-lg border border-border/50 overflow-hidden">
+          <div className="flex rounded-lg border border-border/50 overflow-hidden w-full sm:w-auto">
             <Button 
               variant={view === "month" ? "default" : "ghost"} 
               size="sm" 
               onClick={() => setView("month")}
-              className="text-xs rounded-none first:rounded-l-lg last:rounded-r-lg"
+              className="text-xs rounded-none first:rounded-l-lg last:rounded-r-lg flex-1 sm:flex-none"
             >
               Month
             </Button>
@@ -141,7 +144,7 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
               variant={view === "week" ? "default" : "ghost"} 
               size="sm" 
               onClick={() => setView("week")}
-              className="text-xs rounded-none first:rounded-l-lg last:rounded-r-lg"
+              className="text-xs rounded-none first:rounded-l-lg last:rounded-r-lg flex-1 sm:flex-none"
             >
               Week
             </Button>
@@ -150,7 +153,7 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
       </div>
 
       {/* Calendar Content */}
-      <div className="flex-1 p-4 overflow-auto">
+      <div className="flex-1 p-3 sm:p-4 overflow-auto">
         {view === "month" ? (
           <div className="h-full flex flex-col">
             {/* Days of week header */}
@@ -158,7 +161,7 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
               {daysOfWeek.map((day) => (
                 <div
                   key={day}
-                  className="h-8 flex items-center justify-center font-medium text-xs text-muted-foreground bg-muted/30 rounded-lg"
+                  className="h-6 sm:h-8 flex items-center justify-center font-medium text-xs text-muted-foreground bg-muted/30 rounded-lg"
                 >
                   {day}
                 </div>

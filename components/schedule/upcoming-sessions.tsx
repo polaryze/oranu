@@ -36,27 +36,27 @@ const upcomingSessions = [
 export function UpcomingSessions() {
   return (
     <div className="h-full bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden">
-      <div className="p-4 border-b border-border/50">
-        <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+      <div className="p-3 sm:p-4 border-b border-border/50">
+        <h3 className="text-base sm:text-lg font-semibold text-foreground flex items-center gap-2">
           <Clock className="h-4 w-4" />
           Upcoming
         </h3>
       </div>
-      <div className="flex-1 p-4 overflow-auto">
-        <div className="space-y-3">
+      <div className="flex-1 p-3 sm:p-4 overflow-auto">
+        <div className="space-y-2 sm:space-y-3">
           {upcomingSessions.map((session) => (
-            <div key={session.id} className="group p-3 rounded-xl border border-border/30 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">
-              <div className="space-y-2">
+            <div key={session.id} className="group p-2 sm:p-3 rounded-xl border border-border/30 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">
+              <div className="space-y-1 sm:space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <BookOpen className="h-3 w-3 text-primary" />
-                    <span className="font-medium text-sm">{session.subject}</span>
+                    <span className="font-medium text-xs sm:text-sm">{session.subject}</span>
                   </div>
                   <Badge variant="secondary" className="text-xs">{session.technique}</Badge>
                 </div>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs text-muted-foreground">
                   <span>{session.date} at {session.time}</span>
-                  <span>•</span>
+                  <span className="hidden sm:inline">•</span>
                   <span>{session.duration}m</span>
                 </div>
                 {session.notes && (
