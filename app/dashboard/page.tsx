@@ -4,6 +4,9 @@ import { RecentActivity } from "@/components/dashboard/recent-activity"
 export default function DashboardPage() {
   return (
     <div className="h-full max-w-7xl mx-auto flex flex-col">
+      <div className="text-white text-2xl font-bold p-4">
+        Dashboard Test - Loading Successfully
+      </div>
       {/* Overview Cards */}
       <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-4">
         <OverviewCards />
