@@ -183,63 +183,37 @@ export default function FilesPage() {
               {files.length > 0 ? (
                 <div className="relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 rounded-3xl"></div>
-                  <div className="relative p-6 sm:p-8 lg:p-12 border border-primary/20 rounded-3xl backdrop-blur-sm">
-                    <div className="text-center space-y-6 sm:space-y-8">
-                      <div className="space-y-4">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto">
-                          <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                  <div className="relative p-4 sm:p-6 border border-primary/20 rounded-2xl backdrop-blur-sm">
+                    <div className="text-center space-y-4">
+                      <div className="space-y-3">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center mx-auto">
+                          <Sparkles className="w-6 h-6 text-white" />
                         </div>
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
+                        <h2 className="text-lg sm:text-xl font-bold text-foreground">
                           Ready to Create Your Study Plan?
                         </h2>
-                        <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-                          Our AI will analyze your {files.length} uploaded files and create a personalized study schedule tailored to your learning style and goals.
+                        <p className="text-muted-foreground text-sm max-w-md mx-auto">
+                          AI will analyze your {files.length} files and create a personalized study schedule.
                         </p>
                       </div>
                       
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-2xl mx-auto">
-                        <div className="text-center space-y-2">
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto">
-                            <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                          </div>
-                          <h3 className="font-semibold text-foreground text-sm sm:text-base">Analyze Content</h3>
-                          <p className="text-xs sm:text-sm text-muted-foreground">Extract key topics and concepts</p>
+                      <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                          <span>{files.length} files ready</span>
                         </div>
-                        <div className="text-center space-y-2">
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 rounded-xl flex items-center justify-center mx-auto">
-                            <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
-                          </div>
-                          <h3 className="font-semibold text-foreground text-sm sm:text-base">Create Schedule</h3>
-                          <p className="text-xs sm:text-sm text-muted-foreground">Optimize study sessions</p>
-                        </div>
-                        <div className="text-center space-y-2">
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-secondary/20 rounded-xl flex items-center justify-center mx-auto">
-                            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" />
-                          </div>
-                          <h3 className="font-semibold text-foreground text-sm sm:text-base">Personalize</h3>
-                          <p className="text-xs sm:text-sm text-muted-foreground">Adapt to your learning style</p>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" />
+                          <span>2-3 min</span>
                         </div>
                       </div>
                       
-                      <div className="space-y-4">
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <span>{files.length} files ready</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            <span>2-3 minutes processing</span>
-                          </div>
-                        </div>
-                        
-                        <Link href="/schedule">
-                          <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto">
-                            <Sparkles className="w-5 h-5 mr-2" />
-                            Create My AI Study Plan
-                          </Button>
-                        </Link>
-                      </div>
+                      <Link href="/schedule">
+                        <Button size="sm" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 px-6 py-2 text-sm w-full sm:w-auto">
+                          <Sparkles className="w-4 h-4 mr-2" />
+                          Create AI Study Plan
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -268,7 +242,7 @@ export default function FilesPage() {
           </div>
         </div>
 
-        {/* Files Sidebar - Mobile: Full width, Desktop: Fixed width */}
+        {/* Files Bento Box - Mobile: Full width, Desktop: Fixed width */}
         <div className="w-full lg:w-80 border-t lg:border-t-0 lg:border-l border-border/50 bg-card/30 backdrop-blur-sm">
           <div className="p-4 sm:p-6 border-b border-border/50">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
@@ -291,29 +265,20 @@ export default function FilesPage() {
                 <p className="text-xs sm:text-sm text-muted-foreground">No files uploaded yet</p>
               </div>
             ) : (
-              <div className="space-y-2 sm:space-y-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-3 sm:gap-4">
                 {files.map((file, index) => (
                   <div 
                     key={file.id} 
-                    className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border/30 rounded-xl hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                    className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border border-border/30 rounded-xl hover:border-primary/30 hover:shadow-lg transition-all duration-300 aspect-square"
                     style={{animationDelay: `${index * 50}ms`}}
                   >
-                    <div className="p-3 sm:p-4">
-                      <div className="flex items-start space-x-2 sm:space-x-3">
+                    <div className="p-3 sm:p-4 h-full flex flex-col">
+                      <div className="flex items-start justify-between mb-2">
                         <div className="relative">
-                          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             {getFileIcon(file.type)}
                           </div>
-                          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full border border-card"></div>
-                        </div>
-                        
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-foreground truncate text-xs sm:text-sm">{file.name}</h4>
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs text-muted-foreground mt-1">
-                            <span>{formatFileSize(file.size)}</span>
-                            <span className="hidden sm:inline">•</span>
-                            <span>{formatDate(file.uploaded_at)}</span>
-                          </div>
+                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border border-card"></div>
                         </div>
                         
                         <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -321,7 +286,7 @@ export default function FilesPage() {
                             href={file.url} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="p-1 sm:p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded transition-colors"
+                            className="p-1 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded transition-colors"
                             title="View file"
                           >
                             <Eye className="w-3 h-3" />
@@ -330,7 +295,7 @@ export default function FilesPage() {
                             href={file.url} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="p-1 sm:p-1.5 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
+                            className="p-1 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded transition-colors"
                             title="Download file"
                           >
                             <Download className="w-3 h-3" />
@@ -340,7 +305,7 @@ export default function FilesPage() {
                             size="sm"
                             onClick={() => handleDeleteFile(file.id)}
                             disabled={deletingFile === file.id}
-                            className="p-1 sm:p-1.5 text-red-500 hover:text-red-600 hover:bg-red-500/10 rounded h-auto"
+                            className="p-1 text-red-500 hover:text-red-600 hover:bg-red-500/10 rounded h-auto"
                             title="Delete file"
                           >
                             {deletingFile === file.id ? (
@@ -349,6 +314,19 @@ export default function FilesPage() {
                               <Trash2 className="w-3 h-3" />
                             )}
                           </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="flex-1 flex flex-col justify-between">
+                        <div>
+                          <h4 className="font-medium text-foreground text-xs sm:text-sm line-clamp-2 mb-1">{file.name}</h4>
+                          <div className="text-xs text-muted-foreground">
+                            {formatFileSize(file.size)}
+                          </div>
+                        </div>
+                        
+                        <div className="text-xs text-muted-foreground mt-2">
+                          {formatDate(file.uploaded_at)}
                         </div>
                       </div>
                     </div>
