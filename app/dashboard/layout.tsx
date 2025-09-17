@@ -15,7 +15,8 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="h-screen relative overflow-hidden">
+    <AuthGuard>
+      <div className="h-screen relative overflow-hidden">
         {/* Wallpaper Background */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -44,5 +45,6 @@ export default function DashboardLayout({
           </main>
         </div>
       </div>
+    </AuthGuard>
   )
 }
