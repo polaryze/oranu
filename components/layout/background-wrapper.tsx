@@ -9,17 +9,9 @@ interface BackgroundWrapperProps {
 export function BackgroundWrapper({ children }: BackgroundWrapperProps) {
   return (
     <div 
-      className="relative overflow-auto md:overflow-hidden safari-full-height" 
+      className="h-screen md:h-screen min-h-screen relative overflow-auto md:overflow-hidden" 
       style={{ 
         backgroundColor: '#0A0A0A',
-        minHeight: '100vh',
-        minHeight: '100dvh', // Dynamic viewport height for mobile Safari
-        height: '100vh',
-        height: '100dvh', // Dynamic viewport height for mobile Safari
-        paddingTop: 'env(safe-area-inset-top)',
-        paddingBottom: 'env(safe-area-inset-bottom)',
-        paddingLeft: 'env(safe-area-inset-left)',
-        paddingRight: 'env(safe-area-inset-right)'
       }}
     >
       {/* Wallpaper Background */}

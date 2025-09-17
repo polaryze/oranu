@@ -125,9 +125,10 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    /* Ensure full viewport coverage */
+    /* Ensure full viewport coverage - edge to edge */
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile Safari */
+    background-color: #0A0A0A; /* Match the app background */
   }
   
   /* Ensure full viewport coverage */
@@ -136,17 +137,6 @@
     min-height: 100dvh; /* Dynamic viewport height for mobile */
   }
   
-  /* Safari-specific fixes */
-  @supports (-webkit-touch-callout: none) {
-    html, body {
-      height: -webkit-fill-available;
-    }
-    
-    .safari-full-height {
-      height: -webkit-fill-available;
-      min-height: -webkit-fill-available;
-    }
-  }
   
   ::selection {
     background-color: #ff6b35;
