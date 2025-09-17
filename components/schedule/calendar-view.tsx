@@ -128,12 +128,12 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
-          <div className="flex rounded-lg border border-border/50">
+          <div className="flex rounded-lg border border-border/50 overflow-hidden">
             <Button 
               variant={view === "month" ? "default" : "ghost"} 
               size="sm" 
               onClick={() => setView("month")}
-              className="text-xs"
+              className="text-xs rounded-none first:rounded-l-lg last:rounded-r-lg"
             >
               Month
             </Button>
@@ -141,7 +141,7 @@ export function CalendarView({ onCreateSession }: { onCreateSession: () => void 
               variant={view === "week" ? "default" : "ghost"} 
               size="sm" 
               onClick={() => setView("week")}
-              className="text-xs"
+              className="text-xs rounded-none first:rounded-l-lg last:rounded-r-lg"
             >
               Week
             </Button>
